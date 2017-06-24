@@ -1,4 +1,4 @@
-package com.lda.ZecMinerMonitor;
+package com.lda.zecminer.monitor;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
