@@ -20,8 +20,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.client.MockRestServiceServer;
 
+import com.lda.zecminer.monitor.domain.GpuStat;
 import com.lda.zecminer.monitor.domain.MinerStat;
-import com.lda.zecminer.monitor.domain.Result;
 
 @RunWith(SpringRunner.class)
 @RestClientTest(ZecMinerApiReader.class)
@@ -90,41 +90,41 @@ public class ZecMinerApiReaderTest {
 		expectedMinerStat.setAvailable_servers(1L);
 		expectedMinerStat.setServer_status(2L);
 
-		List<Result> results = new ArrayList<>();
+		List<GpuStat> gpusStat = new ArrayList<>();
 
-		Result result01 = new Result();
+		GpuStat gpu0 = new GpuStat();
 
-		result01.setGpuid(0L);
-		result01.setCudaid(0L);
-		result01.setBusid("0000:01:00.0");
-		result01.setName("GeForce GTX 1060 6GB");
-		result01.setGpu_status(2L);
-		result01.setSolver(0L);
-		result01.setTemperature(67L);
-		result01.setGpu_power_usage(88L);
-		result01.setSpeed_sps(288L);
-		result01.setAccepted_shares(1L);
-		result01.setRejected_shares(0L);
-		result01.setStart_time(1497973765L);
-		results.add(result01);
+		gpu0.setGpuid(0L);
+		gpu0.setCudaid(0L);
+		gpu0.setBusid("0000:01:00.0");
+		gpu0.setName("GeForce GTX 1060 6GB");
+		gpu0.setGpu_status(2L);
+		gpu0.setSolver(0L);
+		gpu0.setTemperature(67L);
+		gpu0.setGpu_power_usage(88L);
+		gpu0.setSpeed_sps(288L);
+		gpu0.setAccepted_shares(1L);
+		gpu0.setRejected_shares(0L);
+		gpu0.setStart_time(1497973765L);
+		gpusStat.add(gpu0);
 
-		Result result02 = new Result();
+		GpuStat gpu1 = new GpuStat();
 
-		result02.setGpuid(1L);
-		result02.setCudaid(1L);
-		result02.setBusid("0000:03:00.0");
-		result02.setName("GeForce GTX 1060 6GB");
-		result02.setGpu_status(2L);
-		result02.setSolver(0L);
-		result02.setTemperature(62L);
-		result02.setGpu_power_usage(104L);
-		result02.setSpeed_sps(310L);
-		result02.setAccepted_shares(4L);
-		result02.setRejected_shares(0L);
-		result02.setStart_time(1497973765L);
-		results.add(result02);
+		gpu1.setGpuid(1L);
+		gpu1.setCudaid(1L);
+		gpu1.setBusid("0000:03:00.0");
+		gpu1.setName("GeForce GTX 1060 6GB");
+		gpu1.setGpu_status(2L);
+		gpu1.setSolver(0L);
+		gpu1.setTemperature(62L);
+		gpu1.setGpu_power_usage(104L);
+		gpu1.setSpeed_sps(310L);
+		gpu1.setAccepted_shares(4L);
+		gpu1.setRejected_shares(0L);
+		gpu1.setStart_time(1497973765L);
+		gpusStat.add(gpu1);
 
-		expectedMinerStat.setResults(results);
+		expectedMinerStat.setGpusStat(gpusStat);
 		return expectedMinerStat;
 	}
 

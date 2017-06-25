@@ -3,8 +3,9 @@ package com.lda.zecminer.monitor.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Result {
+public class GpuStat {
 	
+	private static final int SPEED_MIN_LIMIT = 100;
 	private Long gpuid; // 0,
 	private Long cudaid; // 0,
 	private String busid; // "0000:01:00.0",
@@ -123,7 +124,7 @@ public class Result {
 	}
 	public boolean isWorking() {
 
-		if(speed_sps > 100)
+		if(speed_sps > SPEED_MIN_LIMIT)
 		{
 			return true;
 		}
@@ -155,7 +156,7 @@ public class Result {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Result other = (Result) obj;
+		GpuStat other = (GpuStat) obj;
 		if (accepted_shares == null) {
 			if (other.accepted_shares != null)
 				return false;
