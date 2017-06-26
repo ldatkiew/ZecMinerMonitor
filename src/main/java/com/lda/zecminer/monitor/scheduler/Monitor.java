@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.lda.zecminer.monitor.domain.MinerStat;
-import com.lda.zecminer.monitor.restarter.Restarter;
+import com.lda.zecminer.monitor.restarter.RestarterI;
 import com.lda.zecminer.monitor.web.ZecMinerApiReader;
 
 @Component
@@ -19,7 +19,7 @@ public class Monitor {
 	private ZecMinerApiReader apiReader;
 	
 	@Autowired
-	private Restarter restarter;
+	private RestarterI restarter;
 	
 	@Scheduled(initialDelay = 3000, fixedRate = 5000)
 	public void checkMiners()
