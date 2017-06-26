@@ -21,6 +21,8 @@ public class Monitor {
 	@Autowired
 	private RestarterI restarter;
 	
+	private static int notWorkingCounter = 0;
+	
 	@Scheduled(initialDelay = 3000, fixedRate = 5000)
 	public void checkMiners()
 	{
@@ -36,6 +38,12 @@ public class Monitor {
 		{
 			log.error("Some GPU is not working. Restart work station");
 			log.error(minerStat.forLog());
+			notWorkingCounter++;
+		}
+		
+		if(notWorkingCounter > 1)
+		{
+			log.error("Restart work station");
 			restarter.restart();
 		}
 	}

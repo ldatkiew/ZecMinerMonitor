@@ -2,6 +2,8 @@ package com.lda.zecminer.monitor.scheduler;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
@@ -52,8 +54,18 @@ public class MonitorTest {
 		monitor.checkMiners();
 
 		// Then
-		verify(apiReader).readApi();
-		verify(minerStat).isAllWorking();
-		verify(restarter).restart();
+		verify(apiReader, times(1)).readApi();
+		verify(minerStat, times(1)).isAllWorking();
+		verify(restarter, never()).restart();
+		
+		// When 2
+		monitor.checkMiners();
+
+		// Then 2
+		verify(apiReader, times(2)).readApi();
+		verify(minerStat, times(2)).isAllWorking();
+		verify(restarter, times(1)).restart();
 	}
+	
+	
 }
