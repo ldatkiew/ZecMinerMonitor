@@ -24,6 +24,21 @@ public class MinerStat {
 		minerStat.setError("Created empty stat");
 		return minerStat;
 	}
+	
+	public String forLog() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("MinerStat: ");
+		builder.append(" error=");
+		builder.append(error);
+		builder.append(", server_status=");
+		builder.append(server_status);
+		builder.append(", GPU's=\n");
+		for (GpuStat gpuStat : gpusStat) {
+			builder.append(gpuStat.forLogs());
+		}
+		builder.append("]");
+		return builder.toString();
+	}
 
 	public String getMethod() {
 		return method;

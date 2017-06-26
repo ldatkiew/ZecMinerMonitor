@@ -29,11 +29,13 @@ public class Monitor {
 		
 		if(allWorking)
 		{
-			log.info("All GPU's works"); //TODO:add good logs
+			log.info("All GPU's works");
+			log.info(minerStat.forLog());
 		}
 		else
 		{
-			log.info("Some GPU is not working. Restart work station"); //TODO:add good logs
+			log.error("Some GPU is not working. Restart work station");
+			log.error(minerStat.forLog());
 			restarter.restart();
 		}
 	}

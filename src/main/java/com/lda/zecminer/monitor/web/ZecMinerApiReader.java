@@ -36,8 +36,6 @@ public class ZecMinerApiReader {
 		} catch (Exception e) {
 			LOG.error(e.toString());
 		}
-		LOG.info(stat.toString());
-
 		return stat;
 	}
 

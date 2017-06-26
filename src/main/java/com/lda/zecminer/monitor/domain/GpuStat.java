@@ -1,5 +1,7 @@
 package com.lda.zecminer.monitor.domain;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -18,6 +20,33 @@ public class GpuStat {
 	private Long accepted_shares; // 1,
 	private Long rejected_shares; // 0,
 	private Long start_time; // 1497973765
+	
+	
+	public String forLogs()
+	{
+		StringBuilder builder = new StringBuilder();
+		builder.append("GPU=");
+		builder.append(gpuid);
+		builder.append(", speed_sps= >> ");
+		builder.append(speed_sps);
+		builder.append(" << , name=");
+		builder.append(name);
+		builder.append(", gpu_status=");
+		builder.append(gpu_status);
+		builder.append(", temperature=");
+		builder.append(temperature);
+		builder.append(", gpu_power_usage=");
+		builder.append(gpu_power_usage);
+		builder.append(", start_time=");
+		builder.append(extractedStartDate());
+		builder.append("]\n");
+		return builder.toString();
+	}
+
+	public Date extractedStartDate() {
+		return new Date(start_time * 1000);
+	}
+	
 	public Long getGpuid() {
 		return gpuid;
 	}

@@ -56,5 +56,4 @@ public class MonitorTest {
 		verify(minerStat).isAllWorking();
 		verify(restarter).restart();
 	}
-	
 }
