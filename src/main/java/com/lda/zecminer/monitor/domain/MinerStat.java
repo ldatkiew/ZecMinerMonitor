@@ -190,6 +190,12 @@ public class MinerStat {
 			return false;
 		return true;
 	}
+
+	public void setSpeedMinLimit(int speedMinLimit) {
+		for (GpuStat gpuStat : gpusStat) {
+			gpuStat.setSpeedMinLimit(speedMinLimit);
+		}
+	}
 	
 	
 

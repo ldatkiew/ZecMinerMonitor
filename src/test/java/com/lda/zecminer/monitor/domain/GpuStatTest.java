@@ -11,11 +11,11 @@ public class GpuStatTest {
 	@Test
 	public void should_result_true_for_high_speed_gpu() {
 		// Given
-		GpuStat result = new GpuStat();
-		result.setSpeed_sps(300L);
+		GpuStat gpuStat = new GpuStat();
+		gpuStat.setSpeed_sps(300L);
 
 		// When
-		boolean working = result.isWorking();
+		boolean working = gpuStat.isWorking();
 
 		// Then
 		assertThat(working).isTrue();
@@ -24,11 +24,11 @@ public class GpuStatTest {
 	@Test
 	public void should_result_true_for_low_speed_gpu() {
 		// Given
-		GpuStat result = new GpuStat();
-		result.setSpeed_sps(40L);
+		GpuStat gpuStat = new GpuStat();
+		gpuStat.setSpeed_sps(40L);
 
 		// When
-		boolean working = result.isWorking();
+		boolean working = gpuStat.isWorking();
 
 		// Then
 		assertThat(working).isFalse();
@@ -45,6 +45,29 @@ public class GpuStatTest {
 	
 		// Then
 		assertThat(extractedStartDate).isEqualTo("2017-06-20T17:49:25");
+	}
+	
+	@Test
+	public void should_set_speed_min_limit_on_gpu() {
+		// Given
+		GpuStat gpuStat = new GpuStat();
+
+		int speedMinLimit = 77;
+		// When
+		gpuStat.setSpeedMinLimit(speedMinLimit );
+		
+		// Then
+		
+			// When
+		gpuStat.setSpeed_sps(77L);
+			// Then
+		assertThat(gpuStat.isWorking()).isFalse();
+			// 	When
+		gpuStat.setSpeed_sps(78L);
+			// Then
+		assertThat(gpuStat.isWorking()).isTrue();
+
+
 	}
 	
 //	@Test

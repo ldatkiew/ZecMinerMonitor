@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GpuStat {
 	
-	private static final int SPEED_MIN_LIMIT = 100;
 	private Long gpuid; // 0,
 	private Long cudaid; // 0,
 	private String busid; // "0000:01:00.0",
@@ -21,6 +20,7 @@ public class GpuStat {
 	private Long rejected_shares; // 0,
 	private Long start_time; // 1497973765
 	
+	private int speedMinLimit = 100;
 	
 	public String forLogs()
 	{
@@ -153,7 +153,7 @@ public class GpuStat {
 	}
 	public boolean isWorking() {
 
-		if(speed_sps > SPEED_MIN_LIMIT)
+		if(speed_sps > speedMinLimit)
 		{
 			return true;
 		}
@@ -247,6 +247,10 @@ public class GpuStat {
 		} else if (!temperature.equals(other.temperature))
 			return false;
 		return true;
+	}
+
+	public void setSpeedMinLimit(int speedMinLimit) {
+		this.speedMinLimit = speedMinLimit;
 	}
 	
 }
