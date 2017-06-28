@@ -153,7 +153,6 @@ public class GpuStat {
 	}
 	public boolean isWorking() {
 
-		System.out.println(speedMinLimit);
 		if(speed_sps > speedMinLimit)
 		{
 			return true;
