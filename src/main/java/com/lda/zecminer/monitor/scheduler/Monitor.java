@@ -3,6 +3,7 @@ package com.lda.zecminer.monitor.scheduler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -16,6 +17,9 @@ public class Monitor {
 	private static final int SAME_RESULT_IN_ROW_LIMIT = 4;
 	private static final int NOT_WORKING_IN_ROW_LIMIT = 1;
 	private static final Logger log = LoggerFactory.getLogger(Monitor.class);
+	
+	@Value("${lda.monitor.speedMinLimit}")
+	private int speedMinLimit = 100;
 
 	@Autowired
 	private ZecMinerApiReader apiReader;
@@ -27,10 +31,11 @@ public class Monitor {
 	private int sameResultCounter = 0;
 	private MinerStat previousMinerStat = null;
 
-	@Scheduled(initialDelayString = "${lda.monitor.initialDelay}", fixedRateString = "${lda.monitor.fixedRate}")  //TODO:LDA profile it
+	@Scheduled(initialDelayString = "${lda.monitor.initialDelay}", fixedRateString = "${lda.monitor.fixedRate}")
 	public void checkMiners() {
 		
 		MinerStat minerStat = apiReader.readApi();
+		minerStat.setSpeedMinLimit(speedMinLimit);
 		
 		updateSameStatistics(minerStat);
 		updateAndLogWorkingStatistics(minerStat);

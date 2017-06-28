@@ -3,6 +3,7 @@ package com.lda.zecminer.monitor.domain;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 import java.util.List;
 
@@ -67,6 +68,26 @@ public class MinerStatTest {
 
 		// Then
 		assertThat(allWorking).isFalse();
+	}
+	
+	@Test
+	public void should_set_speed_min_limit_on_all_gpus() {
+		// Given
+
+		MinerStat minerStat = new MinerStat();
+		GpuStat mockGpuWorking01 = mockGpuWorking(true);
+		GpuStat mockGpuWorking02 = mockGpuWorking(false);
+		List<GpuStat> gpus = Lists.newArrayList(mockGpuWorking01, mockGpuWorking02);
+		minerStat.setGpusStat(gpus);
+		
+		int speedMinLimit = 99;
+		// When
+		minerStat.setSpeedMinLimit(speedMinLimit );
+
+		// Then
+		verify(mockGpuWorking01).setSpeedMinLimit(speedMinLimit);
+		verify(mockGpuWorking02).setSpeedMinLimit(speedMinLimit);
+
 	}
 
 	private GpuStat mockGpuWorking(boolean isWorking) {
