@@ -22,16 +22,16 @@ public class Monitor {
 
 	@Autowired
 	private RestarterI restarter;
-
 	
 	private int notWorkingCounter = 0;
 	private int sameResultCounter = 0;
 	private MinerStat previousMinerStat = null;
 
-	@Scheduled(initialDelay = 3000, fixedRate = 5000)  //TODO:LDA profile it
+	@Scheduled(initialDelayString = "${lda.monitor.initialDelay}", fixedRateString = "${lda.monitor.fixedRate}")  //TODO:LDA profile it
 	public void checkMiners() {
+		
 		MinerStat minerStat = apiReader.readApi();
-
+		
 		updateSameStatistics(minerStat);
 		updateAndLogWorkingStatistics(minerStat);
 
